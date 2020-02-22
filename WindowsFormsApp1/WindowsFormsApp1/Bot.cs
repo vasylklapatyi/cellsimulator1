@@ -5,7 +5,6 @@ using System.Text;
 using System.Drawing;
 //energy giver absolute
 //energygiver in otnos
-//mover...
 //photosyntes
 //eat in absolute direction
 //eat in otnos direction
