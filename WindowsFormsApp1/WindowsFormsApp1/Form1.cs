@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 /// <summary>
-/// 1,2,22,23,33,55
+/// 
 /// 23 - photosyntes
 /// 11 - make a step
 /// 22,33,55 divide

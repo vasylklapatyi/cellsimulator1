@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
 {
     public enum BotState
     {
-        Dead, Orgaic, Mineral
+        Dead, Orgaic
      , Solar, Hunter
     }
     public enum Direction
@@ -40,7 +40,7 @@ namespace WindowsFormsApp1
        ,Down,LeftDown,Left,LeftUp
 
     }
-   public class Point
+    public class Point
     {
         public Point()
         {
@@ -67,17 +67,15 @@ namespace WindowsFormsApp1
         }
 
     }
-   public  class Bot
+    public  class Bot
     {
         public static int IDcounter = 0;
-        private BotState Status;
-        private Point position;
         public static int size = 10;
-        private int energy;
+
         public int Energy
         {
-            get { return energy; }
-            set { energy = value; }
+            get; 
+            set; 
         }
         public int ID { get; set; }
         private int[] genom = new int[64]; 
@@ -86,11 +84,10 @@ namespace WindowsFormsApp1
             get { return genom; }
             set { genom = value; }
         }
-        private int gptr = 0;//genotype pointer
         public int Gptr
         {
-            get { return gptr; }
-            set { gptr = value; }
+            get;
+            set;
         }
         private Direction napryamok;
         public Direction Napruamok 
@@ -104,6 +101,7 @@ namespace WindowsFormsApp1
             get { return minerals; }
             set { minerals = value; }
         }
+        private Point position;
         public Point Position
         {
             get { return position; }
@@ -117,7 +115,7 @@ namespace WindowsFormsApp1
             IDcounter++;
             this.ID = IDcounter;
             this.Energy = 10;
-            this.color = Color.Lime;
+            this.color = Color.Green;
             this.Gptr = 0;
             this.MakeAStep(Direction.Down);
         }
@@ -134,8 +132,8 @@ namespace WindowsFormsApp1
         }
         public BotState BotStatus
         {
-            get { return Status; }
-            set { Status = value; }
+            get;
+            set;
         }
         private Color color;
         public Color BotColor
@@ -146,102 +144,108 @@ namespace WindowsFormsApp1
         public Bot previous, next;
         public void MakeAStep(Direction dir)
         {
-            Point newposition = position;
-            bool UP = position.Y < MainItems.MainPolygon.Height - size - 9;
-            bool DOWN = position.Y > size;
-            bool LEFT = position.X > size;
-            bool RIGHT = position.X < MainItems.MainPolygon.Width - size - 9;
-            bool UPRIGHT = UP && RIGHT;
-            bool RIGHTDOWN = RIGHT && DOWN;
-            bool LEFTDOWN = LEFT && DOWN;
-            bool LEFTUP = LEFT && UP;
-            switch (dir)///перевырити ще раз бо тут срака
+            if (this.BotStatus != BotState.Orgaic)
             {
-                case Direction.Up:////
-                    {
-                        if (UP)
+                Point newposition = position;
+                if (ComExec.IsBotOnDirection(this, dir) != null)
+                    return;
+                bool UP = position.Y < MainItems.MainPolygon.Height - size - 9;
+                bool DOWN = position.Y > size;
+                bool LEFT = position.X > size;
+                bool RIGHT = position.X < MainItems.MainPolygon.Width - size - 9;
+                bool UPRIGHT = UP && RIGHT;
+                bool RIGHTDOWN = RIGHT && DOWN;
+                bool LEFTDOWN = LEFT && DOWN;
+                bool LEFTUP = LEFT && UP;
+                switch (dir)///перевырити ще раз бо тут срака
+                {
+                    case Direction.Up:////
                         {
-                        newposition = new Point(position.X,position.Y+size);
+                            if (UP)
+                            {
+                                newposition = new Point(position.X, position.Y + size);
+                            }
+                            break;
                         }
-                        break;
-                    }
-                case Direction.UpRight://////
-                    {
-                        if (UPRIGHT)
-                            newposition = new Point(position.X+size,position.Y+size);
-                        else                
-                            newposition = position;               
-                        break;
-                    }
-                case Direction.Right:////
-                    {
-                        if(RIGHT)
-                        newposition = new Point(position.X + size, position.Y);
-                        else                       
-                        newposition = new Point(size, position.Y);                       
-                        break;
-                    }
-                case Direction.RightDown:////
-                    {
-                        if(RIGHTDOWN)
-                        newposition = new Point(position.X+size,position.Y-size);
-                        else 
-                            newposition = position;
-                        break;
-                    }
-                case Direction.Down://
-                    {
-                        if(DOWN)
-                        newposition = new Point(position.X,position.Y-size);
-                        break;
-                    }
-                case Direction.LeftDown://///
-                    {
-                        if(LEFTDOWN)
-                        newposition = new Point(position.X-size,position.Y-size);
-                        else newposition = position;
+                    case Direction.UpRight://////
+                        {
+                            if (UPRIGHT)
+                                newposition = new Point(position.X + size, position.Y + size);
+                            else
+                                newposition = position;
+                            break;
+                        }
+                    case Direction.Right:////
+                        {
+                            if (RIGHT)
+                                newposition = new Point(position.X + size, position.Y);
+                            else
+                                newposition = new Point(size, position.Y);
+                            break;
+                        }
+                    case Direction.RightDown:////
+                        {
+                            if (RIGHTDOWN)
+                                newposition = new Point(position.X + size, position.Y - size);
+                            else
+                                newposition = position;
+                            break;
+                        }
+                    case Direction.Down://
+                        {
+                            if (DOWN)
+                                newposition = new Point(position.X, position.Y - size);
+                            break;
+                        }
+                    case Direction.LeftDown://///
+                        {
+                            if (LEFTDOWN)
+                                newposition = new Point(position.X - size, position.Y - size);
+                            else newposition = position;
 
-                        break;
-                    }
-                case Direction.Left:////
-                    {
-                        if(position.X > size)
-                        newposition = new Point(position.X-size,position.Y);
-                        else
-                        newposition = new Point(MainItems.MainPolygon.Width - size, position.Y);
-                        break;
-                    }
-                case Direction.LeftUp://
-                    {
-                        if(LEFTUP)
-                        newposition = new Point(position.X-size,position.Y+size);
-                        else newposition = position;
+                            break;
+                        }
+                    case Direction.Left:////
+                        {
+                            if (position.X > size)
+                                newposition = new Point(position.X - size, position.Y);
+                            else
+                                newposition = new Point(MainItems.MainPolygon.Width - size, position.Y);
+                            break;
+                        }
+                    case Direction.LeftUp://
+                        {
+                            if (LEFTUP)
+                                newposition = new Point(position.X - size, position.Y + size);
+                            else newposition = position;
 
+                            break;
+                        }
+                    default:
                         break;
+                }
+                int y = newposition.Y;
+                for (int x = position.X; x < position.X + size; x++)
+                {
+                    for (y = position.Y; y < position.Y + size; y++)
+                    {
+                        MainItems.MainPolygon.SetPixel(x, y, Color.Aqua);
                     }
-                default:
-                     break; 
-            }
-            int y = newposition.Y;
-            for (int x = position.X; x < position.X + size; x++)
-            {
-                for (y = position.Y; y < position.Y + size; y++)
-                {
-                    MainItems.MainPolygon.SetPixel(x, y, Color.Aqua);
                 }
-            }
-            y = newposition.Y;
-            for (int x = newposition.X; x < newposition.X + size; x++)
-            {
-                MainItems.MainPolygon.SetPixel(x, y - 1, Color.Black);
-                for (y = newposition.Y; y < newposition.Y + size; y++)
+                y = newposition.Y;
+                for (int x = newposition.X; x < newposition.X + size; x++)
                 {
-                    if (y == newposition.Y || y == newposition.Y + size - 1)
-                        MainItems.MainPolygon.SetPixel(x, y, Color.Black);
-                    else MainItems.MainPolygon.SetPixel(x, y, this.color);
+                    MainItems.MainPolygon.SetPixel(x, y - 1, Color.Black);
+                    for (y = newposition.Y; y < newposition.Y + size; y++)
+                    {
+                        if (y == newposition.Y || y == newposition.Y + size - 1)
+                            MainItems.MainPolygon.SetPixel(x, y, Color.Black);
+                        else MainItems.MainPolygon.SetPixel(x, y, this.color);
+                    }
                 }
+                this.position = newposition;
             }
-           this.position = newposition;
+            
         }
         public void eat_sun()
         {
