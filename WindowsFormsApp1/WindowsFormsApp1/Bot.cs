@@ -157,6 +157,7 @@ namespace WindowsFormsApp1
                 bool RIGHTDOWN = RIGHT && DOWN;
                 bool LEFTDOWN = LEFT && DOWN;
                 bool LEFTUP = LEFT && UP;
+                //comment for commit
                 switch (dir)///перевырити ще раз бо тут срака
                 {
                     case Direction.Up:////
