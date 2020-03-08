@@ -144,8 +144,6 @@ namespace WindowsFormsApp1
         public Bot previous, next;
         public void MakeAStep(Direction dir)
         {
-            if (this.BotStatus != BotState.Orgaic)
-            {
                 Point newposition = position;
                 if (ComExec.IsBotOnDirection(this, dir) != null)
                     return;
@@ -244,9 +242,7 @@ namespace WindowsFormsApp1
                         else MainItems.MainPolygon.SetPixel(x, y, this.color);
                     }
                 }
-                this.position = newposition;
-            }
-            
+                this.position = newposition;          
         }
         public void eat_sun()
         {
@@ -269,7 +265,7 @@ namespace WindowsFormsApp1
             //this.BotColor = Color.Lime;
             //this.BotStatus = BotState.Solar;
             //RefreshImage();
-            this.Energy += 10;
+            this.Energy += 5;
         }
         public void RefreshImage()
         {

@@ -205,22 +205,19 @@ namespace WindowsFormsApp1
         }
         public static void CreateOriginator(ref Bot bot)
         {
-            Random rand = new Random();
+           // Random rand = new Random(DateTime.Now.Millisecond);
             int[] firstgenom = new int[64];
             for (int j = 0; j < 64; j++)
             {
-                bot.Genotype[j] = rand.Next(0,1000000)%64;
-                //if (j % 2 == 0)
-                //    firstgenom[j] = 23;
-                //else
-                //    firstgenom[j] = 11;
+               // bot.Genotype[j] = rand.Next(0,1000000)%64;
+                if (j % 2 == 0)
+                    bot.Genotype[j] = 23;
+                else
+                    bot.Genotype[j] = 11;
                 //if (j % 2 == 10)
                 //    firstgenom[j] = 35;
-
-
-
             }
-     //       bot.Genotype = firstgenom;
+            //bot.Genotype = firstgenom;
         }
     }
 
