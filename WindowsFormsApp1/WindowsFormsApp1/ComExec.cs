@@ -100,7 +100,7 @@ namespace WindowsFormsApp1
                         case Direction.Up://
                             {
                                 Point p = new Point(currentbot.Position.X, currentbot.Position.Y + Bot.size);
-                                if ((p.Y - bot.Position.Y  <= 3)&&(p.Y - bot.Position.Y >= 0))
+                                if ((p.Y - bot.Position.Y  <= 3)&&(p.Y - bot.Position.Y >= 0) && p.Y < MainItems.MainPolygon.Height -10)
                                     return bot;
                                 break;
                             }
@@ -130,7 +130,7 @@ namespace WindowsFormsApp1
                         case Direction.Down://
                             {
                                 Point p = new Point(currentbot.Position.X, currentbot.Position.Y - Bot.size);
-                            if (( bot.Position.Y - p.Y  <= 3)&&(bot.Position.Y - p.Y >=0))
+                            if (( bot.Position.Y - p.Y  <= 3)&&(bot.Position.Y - p.Y >=0) &&  p.Y > 10)
                                 return bot;
                                 break;
                             }

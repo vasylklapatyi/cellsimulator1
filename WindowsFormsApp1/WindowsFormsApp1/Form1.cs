@@ -21,7 +21,6 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
             Point korin = new Point(10, 10);
-         //   this.WindowState = FormWindowState.Maximized;
             int polwidth = pictureBox1.Width;
             int polheight = pictureBox1.Height;
             MainItems.MainPolygon = new Bitmap(polwidth, polheight);
@@ -29,7 +28,6 @@ namespace WindowsFormsApp1
         }
     private void Form1_Load(object sender, EventArgs e)
         {
-
             pictureBox1.Image = MainItems.MainPolygon;
         }
     public Point point = new Point(150,100);
@@ -69,7 +67,7 @@ namespace WindowsFormsApp1
             }
             if (pickedbot != null  )
             {
-                Bot nearestBot = null ;
+                Bot nearestBot = null;
                 for (int i = 0; i < 8; i++)
                 {
                 nearestBot = ComExec.IsBotOnDirection(pickedbot, (Direction)(i));

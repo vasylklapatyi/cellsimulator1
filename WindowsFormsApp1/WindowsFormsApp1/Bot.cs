@@ -147,8 +147,8 @@ namespace WindowsFormsApp1
                 Point newposition = position;
                 if (ComExec.IsBotOnDirection(this, dir) != null)
                     return;
-                bool UP = position.Y < MainItems.MainPolygon.Height - size - 9;
-                bool DOWN = position.Y > size;
+                bool UP = position.Y < MainItems.MainPolygon.Height - size - 11;
+                bool DOWN = position.Y > size + 5;
                 bool LEFT = position.X > size;
                 bool RIGHT = position.X < MainItems.MainPolygon.Width - size - 9;
                 bool UPRIGHT = UP && RIGHT;
@@ -224,7 +224,9 @@ namespace WindowsFormsApp1
                         break;
                 }
                 int y = newposition.Y;
-                for (int x = position.X; x < position.X + size; x++)
+            try 
+	        {	        
+		 for (int x = position.X; x < position.X + size; x++)
                 {
                     for (y = position.Y; y < position.Y + size; y++)
                     {
@@ -242,6 +244,12 @@ namespace WindowsFormsApp1
                         else MainItems.MainPolygon.SetPixel(x, y, this.color);
                     }
                 }
+	        }
+	        catch (Exception)
+	        {
+            return;
+	        }
+               
                 this.position = newposition;          
         }
         public void eat_sun()
@@ -269,11 +277,13 @@ namespace WindowsFormsApp1
         }
         public void RefreshImage()
         {
-
-            for (int x = this.Position.X; x < this.Position.X + Bot.size; x++)
+    try 
+	{	        
+		 for (int x = this.Position.X; x < this.Position.X + Bot.size; x++)
             {
                 for (int y = this.Position.Y; y < this.Position.Y + Bot.size; y++)
                 {
+                    
                     MainItems.MainPolygon.SetPixel(x, y, Color.Aqua);
                 }
             }
@@ -284,16 +294,31 @@ namespace WindowsFormsApp1
                     MainItems.MainPolygon.SetPixel(x, y, this.BotColor);
                 }
             }
+	}
+	catch (Exception)
+	{
+
+		return;
+	}
+           
         }
         public void Divide()
         {
-            Point p = ComExec.PointFromDir(this,(Direction)ComExec.FindEmptyDir(this));
+            int dirsearchresult;
+            if((dirsearchresult = ComExec.FindEmptyDir(this)) != -1)
+           {
+            
+            Point p = ComExec.PointFromDir(this,(Direction)dirsearchresult);
             Bot bot = new Bot(p);
             bot.Genotype = this.Genotype;
-            bot.Gptr = (new Random()).Next(63);
-            bot.RefreshImage();
-            
+            bot.Gptr = (new Random(DateTime.Now.Millisecond)).Next(63);
+            bot.RefreshImage();         
             MainItems.botstoadd.Add(bot);
+            }
+            else
+            {
+                this.Die();
+            }
         }
         public void Die()
         {
