@@ -273,6 +273,7 @@ namespace WindowsFormsApp1
             //this.BotColor = Color.Lime;
             //this.BotStatus = BotState.Solar;
             //RefreshImage();
+
             this.Energy += 5;
         }
         public void RefreshImage()
@@ -297,10 +298,8 @@ namespace WindowsFormsApp1
 	}
 	catch (Exception)
 	{
-
 		return;
-	}
-           
+	}   
         }
         public void Divide()
         {
