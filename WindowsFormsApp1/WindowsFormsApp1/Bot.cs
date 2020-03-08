@@ -29,11 +29,7 @@ using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-    public enum BotState
-    {
-        Dead, Orgaic
-     , Solar, Hunter
-    }
+
     public enum Direction
     {
         Up,UpRight,Right,RightDown
@@ -77,7 +73,8 @@ namespace WindowsFormsApp1
             get; 
             set; 
         }
-        public int ID { get; set; }
+        private int id;
+        public int ID { get { return id; } set { id = value; } }
         private int[] genom = new int[64]; 
         public int[ ] Genotype
         {
@@ -110,8 +107,8 @@ namespace WindowsFormsApp1
         public Bot() {   }
         public Bot(Point pos)
         {
-            this.BotStatus = BotState.Solar;
             this.position = pos;
+            this.BotStatus = 1;
             IDcounter++;
             this.ID = IDcounter;
             this.Energy = 10;
@@ -122,7 +119,6 @@ namespace WindowsFormsApp1
         public Bot(Point pos,int[] genom)
         {
             this.Genotype = genom;
-            this.BotStatus = BotState.Solar;
             this.position = pos;
             IDcounter++;
             this.ID = IDcounter;
@@ -130,11 +126,18 @@ namespace WindowsFormsApp1
             this.color = Color.Lime;
             this.MakeAStep(Direction.Down);
         }
-        public BotState BotStatus
+        private int status;
+        //0 -dead
+        //1 - solar
+        //2 - hunter
+        //3 - mineral
+        public int BotStatus
         {
-            get;
-            set;
+            get { return status; }
+            set { status = value; }
         }
+
+
         private Color color;
         public Color BotColor
         {
@@ -147,8 +150,8 @@ namespace WindowsFormsApp1
                 Point newposition = position;
                 if (ComExec.IsBotOnDirection(this, dir) != null)
                     return;
-                bool UP = position.Y < MainItems.MainPolygon.Height - size - 11;
-                bool DOWN = position.Y > size + 5;
+                bool UP = position.Y < MainItems.MainPolygon.Height - size - 1;
+                bool DOWN = position.Y > size + 10;
                 bool LEFT = position.X > size;
                 bool RIGHT = position.X < MainItems.MainPolygon.Width - size - 9;
                 bool UPRIGHT = UP && RIGHT;
@@ -254,26 +257,8 @@ namespace WindowsFormsApp1
         }
         public void eat_sun()
         {
-            //int t = 0;
-            //if (this.Energy >= 1000)
-            //{
-            //    this.Energy = 1000;
-            //    return;
-            //}/////////
-            //if (this.Minerals >= 100)
-            //{
-            //    t = 1;
-            //}
-            //else t = 2;
-            //int energy = MainItems.Season - (this.Position.Y - 1) / 6 - t;
-            //if (energy > 0)
-            //{
-            //    this.Energy += energy;
-            //}
-            //this.BotColor = Color.Lime;
-            //this.BotStatus = BotState.Solar;
-            //RefreshImage();
-
+        int energyfromlvl =0;
+      //  if()
             this.Energy += 5;
         }
         public void RefreshImage()
@@ -321,7 +306,7 @@ namespace WindowsFormsApp1
         }
         public void Die()
         {
-            this.BotStatus = BotState.Orgaic;
+            this.BotStatus = 0;
             this.BotColor = Color.Gray;
         }
         public void GiveFree()
@@ -450,8 +435,11 @@ namespace WindowsFormsApp1
         }
         public void FallDead()
         {
-            this.Position.Y -= Bot.size;
-            this.RefreshImage();
+            if (ComExec.IsBotOnDirection(this, Direction.Up) == null)
+            {
+                this.Position.Y -= Bot.size;
+                this.RefreshImage();
+            }
         }
     }
 }

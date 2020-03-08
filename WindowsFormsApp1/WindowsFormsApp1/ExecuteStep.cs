@@ -13,7 +13,12 @@ namespace WindowsFormsApp1
             Random rand = new Random(DateTime.Now.Millisecond);
             foreach (var bot in MainItems.bots)
             {
-             if(bot.Energy == 150)
+                if (bot.BotStatus == 0)
+                {
+                    bot.FallDead();
+                    continue;
+                }
+                if (bot.Energy == 150)
               bot.Divide();
              bool sce = false;
              if (bot.Energy >= 999) bot.Energy = 999;
@@ -34,7 +39,7 @@ namespace WindowsFormsApp1
                 {
                     bot.Divide();
                 }
-
+            
             if(!sce) bot.Gptr+=bot.Genotype[bot.Gptr];     
             if (bot.Gptr > 63)   bot.Gptr -= 64;   
           

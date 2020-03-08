@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
         {
             Random rand1 = new Random();
             Random rand2 = new Random();
-
+            // System.Math.Round
             //  Point spawn = new Point(rand1.Next(Bot.size,MainItems.MainPolygon.Width-Bot.size), rand2.Next(Bot.size, MainItems.MainPolygon.Height - Bot.size));
                 Point spawn = new Point((new Random()).Next() % MainItems.MainPolygon.Width, (new Random()).Next() % MainItems.MainPolygon.Height);
          ////   point.Y += Bot.size;
@@ -75,9 +75,9 @@ namespace WindowsFormsApp1
                         break;
                 }
                 if(nearestBot != null)
-                textBox2.Text = $"Position {pickedbot.Position.X}:{pickedbot.Position.Y}; ID:{pickedbot.ID};Nearest bot:{nearestBot.ID}";
+                textBox2.Text = $"Position {pickedbot.Position.X}:{pickedbot.Position.Y}; ID:{pickedbot.ID};Nearest bot:{nearestBot.ID};BotStatus:{pickedbot.BotStatus}";
                 else
-                textBox2.Text = $"Position {pickedbot.Position.X}:{pickedbot.Position.Y}; ID:{pickedbot.ID};Energy:{pickedbot.Energy};Gptr:{pickedbot.Gptr}";
+                textBox2.Text = $"Position {pickedbot.Position.X}:{pickedbot.Position.Y}; ID:{pickedbot.ID};Energy:{pickedbot.Energy};Gptr:{pickedbot.Gptr};BotStatus:{pickedbot.BotStatus}";
 
             }
             else textBox2.Text = "Pick the bot";

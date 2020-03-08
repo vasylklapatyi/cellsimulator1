@@ -1,0 +1,19 @@
+            //int t = 0;
+            //if (this.Energy >= 1000)
+            //{
+            //    this.Energy = 1000;
+            //    return;
+            //}/////////
+            //if (this.Minerals >= 100)
+            //{
+            //    t = 1;
+            //}
+            //else t = 2;
+            //int energy = MainItems.Season - (this.Position.Y - 1) / 6 - t;
+            //if (energy > 0)
+            //{
+            //    this.Energy += energy;
+            //}
+            //this.BotColor = Color.Lime;
+            //this.BotStatus = BotState.Solar;
+            //RefreshImage();
