@@ -24,7 +24,7 @@ namespace WindowsFormsApp1
             int polwidth = pictureBox1.Width;
             int polheight = pictureBox1.Height;
             MainItems.MainPolygon = new Bitmap(polwidth, polheight);
-
+             
         }
     private void Form1_Load(object sender, EventArgs e)
         {
