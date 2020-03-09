@@ -131,6 +131,7 @@ namespace WindowsFormsApp1
         //1 - solar
         //2 - hunter
         //3 - mineral
+        //4 - wall(mustredirectcode)
         public int BotStatus
         {
             get { return status; }

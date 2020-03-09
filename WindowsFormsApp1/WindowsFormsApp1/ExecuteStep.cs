@@ -42,9 +42,7 @@ namespace WindowsFormsApp1
             
             if(!sce) bot.Gptr+=bot.Genotype[bot.Gptr];     
             if (bot.Gptr > 63)   bot.Gptr -= 64;   
-          
-           
-
+         
             }
             MainItems.bots.AddRange(MainItems.botstoadd.ToArray());
             MainItems.botstoadd.Clear();

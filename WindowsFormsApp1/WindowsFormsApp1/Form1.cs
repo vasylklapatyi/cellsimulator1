@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-/// <summary>
+/// 
 /// 
 /// 23 - photosyntes
 /// 11 - make a step
@@ -10,9 +10,6 @@ using System.Windows.Forms;
 /// 1,2 - give energy for free
 /// 
 /// 
-/// 
-/// 
-/// </summary>
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
@@ -38,9 +35,9 @@ namespace WindowsFormsApp1
             // System.Math.Round
             //  Point spawn = new Point(rand1.Next(Bot.size,MainItems.MainPolygon.Width-Bot.size), rand2.Next(Bot.size, MainItems.MainPolygon.Height - Bot.size));
                 Point spawn = new Point((new Random()).Next() % MainItems.MainPolygon.Width, (new Random()).Next() % MainItems.MainPolygon.Height);
-         ////   point.Y += Bot.size;
-         ////   point.X += Bot.size;
-         //   //Point spawn = new Point(300, 300);
+            //   point.Y += Bot.size;
+            //  point.X += Bot.size;
+            //   //Point spawn = new Point(300, 300);
             Bot bot = new Bot(spawn);
             bot.RefreshImage();
             ComExec.CreateOriginator(ref bot);
